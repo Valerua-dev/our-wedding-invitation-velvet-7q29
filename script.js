@@ -1,123 +1,23 @@
 'use strict';
-
-// СВАДЕБНЫЙ ЖУРНАЛ · 9 отдельных страниц, вместо длинного сайта.
-const pages = [...document.querySelectorAll('.mag-page')];
-const nextButton = document.getElementById('nextPage');
-const prevButton = document.getElementById('prevPage');
-const indicator = document.getElementById('pageIndicator');
-const openButton = document.getElementById('openBtn');
-const coverBook = document.getElementById('book');
 const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let currentPage = 0;
-let busy = false;
-
-const pageNames = ['ОБЛОЖКА', 'ПРИГЛАШЕНИЕ', 'ДО СВАДЬБЫ', 'ПРОГРАММА', 'МЕСТА', 'ДЕТАЛИ', 'АНКЕТА', 'КОНТАКТЫ', 'ФИНАЛ'];
-function updateNavigation() {
-  const label = `${pageNames[currentPage]}  ·  ${String(currentPage + 1).padStart(2, '0')} / ${String(pages.length).padStart(2, '0')}`;
-  indicator.textContent = label;
-  prevButton.disabled = busy || currentPage === 0;
-  nextButton.disabled = busy || currentPage === pages.length - 1;
+// Наблюдаем за появлением элементов, не скрывая их при недоступном JS.
+if (!noMotion && 'IntersectionObserver' in window) document.body.classList.add('motion-ready');
+const observer = !noMotion && 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
+}, { threshold: .10, rootMargin: '0px 0px -25px 0px' }) : null;
+if (observer) document.querySelectorAll('.reveal, .timeline-row, .detail, .venue-card, .letter p').forEach(el => observer.observe(el));
+else document.querySelectorAll('.reveal, .timeline-row, .detail, .venue-card, .letter p').forEach(el => el.classList.add('is-visible'));
+// Линия прокрутки в шапке.
+const progress = document.getElementById('scrollProgress');
+let ticking = false;
+function updateScrollProgress() {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.transform = `scaleX(${total > 0 ? Math.min(1, window.scrollY / total) : 0})`;
+  ticking = false;
 }
-function moveTo(index, animate = true) {
-  if (busy || index < 0 || index >= pages.length || index === currentPage) return;
-  const outgoing = pages[currentPage];
-  const incoming = pages[index];
-  const forward = index > currentPage;
-  busy = true;
-  updateNavigation();
-  incoming.scrollTop = 0;
-  incoming.removeAttribute('inert');
-  incoming.setAttribute('aria-hidden', 'false');
-  incoming.classList.add(forward ? 'turn-in-next' : 'turn-in-prev');
-  outgoing.classList.add(forward ? 'turn-out-next' : 'turn-out-prev');
-  const complete = () => {
-    outgoing.classList.remove('page-entered', 'active', 'turn-out-next', 'turn-out-prev');
-    outgoing.setAttribute('aria-hidden', 'true');
-    outgoing.setAttribute('inert', '');
-    incoming.classList.remove('turn-in-next', 'turn-in-prev');
-    incoming.classList.add('active');
-    // Анимация запускается только ПОСЛЕ завершения перелистывания.
-    // Сбрасываем её, чтобы при возврате на страницу надписи проявлялись снова.
-    requestAnimationFrame(() => requestAnimationFrame(() => incoming.classList.add('page-entered')));
-    currentPage = index;
-    busy = false;
-    updateNavigation();
-  };
-  window.setTimeout(complete, animate && !noMotion ? 780 : 0);
-}
-nextButton.addEventListener('click', () => moveTo(currentPage + 1));
-prevButton.addEventListener('click', () => moveTo(currentPage - 1));
-openButton.addEventListener('click', () => {
-  if (busy) return;
-  coverBook.classList.add('opened');
-  busy = true;
-  updateNavigation();
-  window.setTimeout(() => { busy = false; moveTo(1); }, noMotion ? 0 : 1050);
-});
-// Управление с клавиатуры, когда фокус не находится в поле анкеты.
-document.addEventListener('keydown', event => {
-  if (event.altKey || event.ctrlKey || event.metaKey) return;
-  if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]')) return;
-  if (event.key === 'ArrowRight') { event.preventDefault(); moveTo(currentPage + 1); }
-  if (event.key === 'ArrowLeft') { event.preventDefault(); moveTo(currentPage - 1); }
-});
-// Свайпы: только горизонтальные; вертикальный скролл внутри длинных страниц не блокируем.
-let touchStart = null;
-const shell = document.getElementById('magazineShell');
-shell.addEventListener('touchstart', event => {
-  if (event.touches.length !== 1) return;
-  touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-}, { passive: true });
-shell.addEventListener('touchend', event => {
-  if (!touchStart || !event.changedTouches.length) return;
-  const dx = event.changedTouches[0].clientX - touchStart.x;
-  const dy = event.changedTouches[0].clientY - touchStart.y;
-  touchStart = null;
-  if (Math.abs(dx) < 65 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
-  if (event.target.closest('input,textarea,select')) return;
-  moveTo(currentPage + (dx < 0 ? 1 : -1));
-}, { passive: true });
-updateNavigation();
-
-// Эффект печатных букв: разбиваем только заголовки, сохраняя курсив <i>.
-// Буквы появляются при каждом входе на страницу, а не при первой загрузке сайта.
-function prepareLetterHeadings() {
-  const headings = document.querySelectorAll(
-    '.mag-page .display, .mag-page .letter h3, .mag-page .contact-card h3, ' +
-    '.mag-page .final-submit h3, .mag-page .ending h2, .mag-page .inside-center h2'
-  );
-  headings.forEach(heading => {
-    if (heading.dataset.lettersReady) return;
-    heading.dataset.lettersReady = 'true';
-    const accessibleText = heading.textContent.replace(/\s+/g, ' ').trim();
-    heading.setAttribute('aria-label', accessibleText);
-    heading.classList.add('letter-heading');
-    const textNodes = [];
-    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
-    let count = 0;
-    for (const node of textNodes) {
-      const fragment = document.createDocumentFragment();
-      for (const char of node.textContent) {
-        if (/\s/.test(char)) {
-          fragment.appendChild(document.createTextNode(char));
-        } else {
-          const span = document.createElement('span');
-          span.className = 'letter-char';
-          span.textContent = char;
-          span.style.setProperty('--char-order', String(count++));
-          span.setAttribute('aria-hidden', 'true');
-          fragment.appendChild(span);
-        }
-      }
-      node.parentNode.replaceChild(fragment, node);
-    }
-  });
-}
-prepareLetterHeadings();
-// Запускаем появление текста на первой странице после загрузки.
-requestAnimationFrame(() => requestAnimationFrame(() => pages[0].classList.add('page-entered')));
-
+window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateScrollProgress); ticking = true; } }, {passive:true});
+window.addEventListener('resize', updateScrollProgress);
+updateScrollProgress();
 // Отсчёт до 21 июля 2027, 10:30, Белгород (UTC+3).
 const weddingTime = Date.parse('2027-07-21T10:30:00+03:00');
 function updateCountdown() {
@@ -171,9 +71,9 @@ submitButton.addEventListener('click', () => {
   const invalid = [...form.elements].find(element => element.willValidate && !element.checkValidity());
   if (invalid) {
     formMessage.className = 'form-message error';
-    formMessage.textContent = 'Пожалуйста, заполните обязательные поля анкеты. Мы открыли нужную страницу.';
-    moveTo(pages.findIndex(page => page.id === 'rsvp'));
-    window.setTimeout(() => invalid.focus({ preventScroll: false }), noMotion ? 50 : 820);
+    formMessage.textContent = 'Пожалуйста, заполните обязательные поля анкеты выше.';
+    document.getElementById('rsvp').scrollIntoView({behavior: noMotion ? 'auto' : 'smooth', block: 'start'});
+    window.setTimeout(() => invalid.focus({ preventScroll: true }), noMotion ? 0 : 450);
     return;
   }
   form.requestSubmit();
@@ -185,7 +85,7 @@ form.addEventListener('submit', async event => {
   if (!/^[a-z0-9]{8}$/i.test(FORMSPREE_FORM_ID) || FORMSPREE_FORM_ID === 'YOUR_FORM_ID') {
     formMessage.classList.add('error');
     formMessage.textContent = 'Анкета пока работает в режиме просмотра: отправка организаторам ещё не подключена. Для получения ответов нужно настроить Formspree.';
-    formMessage.scrollIntoView({ block: 'nearest', behavior: noMotion ? 'instant' : 'smooth' });
+    formMessage.scrollIntoView({ block: 'nearest', behavior: noMotion ? 'auto' : 'smooth' });
     return;
   }
   const data = new FormData(form);
@@ -220,3 +120,78 @@ form.addEventListener('submit', async event => {
     submitButton.textContent = 'ОТПРАВИТЬ ОТВЕТ ↗';
   }
 });
+
+// ====================================
+// ПЕЧАТЬ ТЕКСТА НА ПЕРВОЙ ФОТОГРАФИИ
+// ====================================
+
+function startWeddingTyping() {
+  const elements = document.querySelectorAll(
+    ".wedding-hero .wedding-typing"
+  );
+
+  const scrollHint = document.querySelector(
+    ".wedding-hero .wedding-scroll"
+  );
+
+  if (!elements.length) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const sleep = ms =>
+    new Promise(resolve => setTimeout(resolve, ms));
+
+  async function typeText(element, speed) {
+    const text = element.dataset.typing || "";
+
+    if (reducedMotion) {
+      element.textContent = text;
+      return;
+    }
+
+    element.textContent = "";
+    element.classList.add("is-typing");
+
+    for (const character of Array.from(text)) {
+      element.textContent += character;
+
+      await sleep(speed);
+    }
+
+    element.classList.remove("is-typing");
+  }
+
+  async function runAnimation() {
+    if (!reducedMotion) {
+      await sleep(350);
+    }
+
+    for (let i = 0; i < elements.length; i++) {
+      const speed = i === 1 ? 95 : 35;
+
+      await typeText(elements[i], speed);
+
+      if (!reducedMotion) {
+        await sleep(250);
+      }
+    }
+
+    if (scrollHint) {
+      scrollHint.classList.add("is-visible");
+    }
+  }
+
+  runAnimation();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    startWeddingTyping,
+    { once: true }
+  );
+} else {
+  startWeddingTyping();
+}
