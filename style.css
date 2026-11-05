@@ -1,0 +1,110 @@
+:root{--paper:#f8f8f5;--white:#fff;--ink:#141414;--gray:#666;--rule:#b8b8b5;--bg:#e7e7e5}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}h1,h2,h3,p,figure{margin-top:0}h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit}.micro,.edition,.folio,.cover-top,.cover-caption,.cover-bottom small,.cover-bottom strong,.cover-back,.label,.tiny{font-size:10px;letter-spacing:.17em;text-transform:uppercase}.muted,.fineprint{color:#727272}.fineprint{font-size:12px;line-height:1.7}.hero{min-height:100svh;padding:28px 16px 35px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}.edition{width:min(90vw,470px);display:flex;justify-content:space-between;gap:12px}.book-stage{width:min(82vw,490px);aspect-ratio:.74;perspective:2200px;position:relative}.book{position:relative;width:100%;height:100%;transform-style:preserve-3d}.inside-cover,.cover-sheet{position:absolute;inset:0}.inside-cover{padding:8%;background:var(--paper);border:1px solid #c9c9c6;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;box-shadow:0 18px 45px #0002}.inside-center h2{font-size:clamp(46px,8vw,94px);line-height:.85;margin:15px 0}.inside-center .heart{font-size:55px}.cover-sheet{z-index:2;transform-origin:left center;transform-style:preserve-3d;transition:transform 1.6s cubic-bezier(.65,.02,.2,1)}.book.opened .cover-sheet{transform:rotateY(-180deg)}.cover-front,.cover-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}.cover-front{padding:5%;background:white;border:1px solid #ddd;box-shadow:5px 12px 34px #0002;display:flex;flex-direction:column;min-height:0}.cover-top{display:flex;justify-content:space-between;gap:10px;font-size:8px}.masthead{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(31px,6.6vw,69px);white-space:nowrap;text-align:center;letter-spacing:-.065em;line-height:1.1;margin:2% 0}.cover-caption{text-align:center;padding:0 0 3%;font-size:9px}.cover-caption span{font-family:Georgia,serif;font-size:15px}.cover-photo{display:flex;align-items:center;justify-content:center;background:#ddd;flex:1;min-height:0;margin:0;overflow:hidden}.cover-photo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}.cover-bottom{display:flex;justify-content:space-between;gap:10px;padding-top:4%;border-bottom:1px solid #333;padding-bottom:3%}.cover-bottom>div{display:flex;flex-direction:column;gap:3px}.cover-bottom small{font-size:8px;color:#777}.cover-bottom strong{font-family:"Cormorant Garamond",serif;font-size:clamp(17px,3vw,26px);letter-spacing:0;font-weight:600}.cover-bottom-right{text-align:right}.cover-back{transform:rotateY(180deg);background:#f6f6f2;display:flex;align-items:center;justify-content:space-between;flex-direction:column;padding:9%;border:1px solid #ddd}.cover-back span{font-size:90px}.solid-button{background:#161616;color:white;border:1px solid #161616;padding:16px 27px;display:inline-flex;justify-content:space-between;align-items:center;gap:35px;font-size:11px;letter-spacing:.13em;transition:background .3s,color .3s,transform .3s}.solid-button:hover{background:white;color:#111;transform:translateY(-3px)}.solid-button:disabled{opacity:.55;cursor:default}.paper{min-height:90svh;padding:70px clamp(18px,4vw,60px);background:white}.paper:nth-of-type(even){background:var(--paper)}.wrap{max-width:1120px;margin:0 auto}.folio{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #111;padding-bottom:14px}.folio.bottom{border:0;border-top:1px solid #111;padding-top:14px;padding-bottom:0;margin-top:85px}.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(25px,6vw,90px);padding:110px 0}.display{font-size:clamp(75px,11vw,160px);line-height:.85;letter-spacing:-.055em;margin:30px 0}.display i{font-weight:400}.page-num{font-family:"Cormorant Garamond",serif;color:#dededc;font-size:130px;margin-top:60px}.letter{padding-top:35px}.letter h3{font-size:clamp(52px,6vw,88px);line-height:.94;margin:22px 0}.rule{width:60px;height:1px;background:#111;margin:34px 0}.letter p{font-size:17px;line-height:1.95;margin:0 0 24px}.date-line{display:block;margin:30px 0;font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:600}.signature{font-family:"Cormorant Garamond",serif;font-size:28px;font-style:italic}.center-block{text-align:center;padding:100px 0}.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:680px;margin:75px auto 20px}.countdown>div{border-top:1px solid #777;padding-top:18px}.countdown strong{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(48px,7vw,90px);font-weight:500;line-height:1}.countdown small{font-size:10px;letter-spacing:.15em}.section-heading{text-align:center;padding:100px 0 65px}.section-heading p{font-size:14px;line-height:1.7;color:#666}.timeline{max-width:850px;margin:0 auto}.timeline-row{display:grid;grid-template-columns:155px 1fr 26px;gap:22px;padding:30px 0;border-top:1px solid var(--rule)}.timeline-row:last-child{border-bottom:1px solid var(--rule)}.timeline-row b{font-family:"Cormorant Garamond",serif;font-size:39px;font-weight:500;white-space:nowrap}.timeline-row h3{font-size:32px;margin:0 0 5px}.timeline-row p{font-size:13px;line-height:1.7;color:#666}.timeline-row small{font-size:11px}.venue-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.venue-card{border:1px solid #aaa;padding:clamp(22px,4vw,42px);display:flex;align-items:flex-start;flex-direction:column;min-height:390px}.venue-card h3{font-size:clamp(35px,4vw,55px);line-height:.95;margin:28px 0}.venue-card .place{font-size:17px;font-weight:600}.venue-card p{font-size:14px;line-height:1.8}.outline-link{display:inline-block;padding:15px 20px;border:1px solid #111;text-decoration:none;font-size:11px;letter-spacing:.1em;margin-top:auto;transition:all .25s}.outline-link:hover,.outline-link:focus-visible{background:#111;color:white}.details-list{max-width:860px;margin:auto}.detail{display:grid;grid-template-columns:85px 1fr;gap:25px;border-top:1px solid var(--rule);padding:26px 0}.detail:last-child{border-bottom:1px solid var(--rule)}.detail>span{font-size:11px}.detail h3{font-size:34px;margin:0 0 6px}.detail p{font-size:14px;line-height:1.9;color:#555;margin:0}.rsvp-form{max-width:590px;margin:auto;display:flex;flex-direction:column;gap:18px}.rsvp-form>label,.rsvp-form legend{font-size:11px;letter-spacing:.12em}.rsvp-form input[type=text],.rsvp-form textarea{width:100%;padding:14px 10px;border:0;border-bottom:1px solid #888;background:transparent;border-radius:0;outline-offset:4px;color:#111}.rsvp-form textarea{resize:vertical}.rsvp-form fieldset{border:0;margin:0;padding:16px 0}.rsvp-form legend{margin-bottom:10px}.choice{display:flex;align-items:center;gap:12px;cursor:pointer;padding:8px 0;font-size:14px}.choice input{accent-color:#111}#attendingFields:not([hidden]){display:flex;flex-direction:column;gap:17px}#attendingFields[hidden]{display:none}.form-message{font-size:14px;line-height:1.65}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:auto}.contact-card{padding:32px;border:1px solid #bbb;text-align:center}.contact-card h3{font-size:45px;margin:0}.contact-card p{font-size:13px}.chat-note{text-align:center;margin:45px 0;color:#777;font-size:14px}.ending{min-height:80svh;background:#111;color:white;padding:80px 25px;display:flex;align-items:center;justify-content:center;text-align:center}.ending h2{font-size:clamp(75px,11vw,145px);line-height:.85;letter-spacing:-.05em;margin:32px 0}.ending p{font-size:16px;color:#ccc}.reveal{opacity:0;transform:translateY(38px);transition:opacity 1s ease,transform 1s ease}.reveal.visible{opacity:1;transform:none}.back-top{position:fixed;right:20px;bottom:20px;z-index:30;width:44px;height:44px;border:1px solid #111;background:white;color:#111;font-size:23px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}.back-top.show{opacity:1;visibility:visible}@media(max-width:700px){.hero{padding:22px 10px}.book-stage{width:min(85vw,420px)}.masthead{font-size:clamp(28px,7vw,44px)}.cover-bottom strong{font-size:16px}.cover-top{font-size:6px}.cover-caption{font-size:8px}.paper{padding:48px 19px}.folio{font-size:8px}.split{grid-template-columns:1fr;gap:12px;padding:60px 0}.display{font-size:clamp(72px,18vw,110px)}.page-num{display:none}.letter{padding:5px 0}.letter p{font-size:16px}.section-heading{padding:65px 0 45px}.countdown{gap:6px;margin-top:50px}.countdown strong{font-size:clamp(39px,10vw,65px)}.countdown small{font-size:8px}.timeline-row{grid-template-columns:86px 1fr 18px;gap:12px}.timeline-row b{font-size:26px}.timeline-row h3{font-size:25px}.venue-grid,.contact-grid{grid-template-columns:1fr}.venue-card{min-height:340px}.detail{grid-template-columns:35px 1fr;gap:14px}.detail h3{font-size:27px}.folio.bottom{margin-top:60px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cover-sheet,.reveal,.solid-button,.back-top{transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Версия 2: журнальная обложка и адаптация под узкие экраны */
+.cover-front{container-type:inline-size}
+.masthead{display:flex;flex-direction:column;align-items:center;justify-content:center;white-space:normal;overflow-wrap:normal;letter-spacing:-.055em;font-size:clamp(35px,13cqw,71px);line-height:.82;margin:4% 0 3%;text-align:center}
+.masthead span{display:block;max-width:100%}
+.cover-caption{padding-top:2%;padding-bottom:3%;letter-spacing:.12em}
+.cover-bottom{gap:8px}
+.cover-bottom>div{min-width:0}
+.cover-bottom strong{overflow-wrap:anywhere}
+.rsvp-reminder{padding:18px 20px;border-left:2px solid #111;background:#f1f1ef;font-size:13px;line-height:1.75;margin:10px 0 14px}
+@media(max-width:700px){
+ .masthead{font-size:clamp(28px,13cqw,58px);line-height:.88;margin:3% 0}
+ .cover-caption{font-size:clamp(7px,2cqw,10px)}
+ .cover-bottom{padding-top:5px}
+ .cover-bottom strong{font-size:clamp(11px,3.1cqw,15px)}
+ .cover-bottom small{font-size:clamp(6px,1.8cqw,8px)}
+ .cover-photo{min-height:0}
+ .rsvp-reminder{padding:15px}
+}
+@media(max-width:380px){.cover-top{letter-spacing:.06em}.cover-bottom-right{text-align:right}}
+
+/* Дополнительный напиток */
+.other-drink-field{margin:10px 0 6px 30px;padding:15px 20px;border-left:1px solid #111;background:#f5f5f2;display:flex;flex-direction:column;gap:9px}
+.other-drink-field[hidden]{display:none}
+.other-drink-field label{font-size:11px;letter-spacing:.12em}
+.other-drink-field input{width:100%;min-width:0}
+.form-message.error{color:#9f2727}
+.form-message.success{color:#21633d}
+
+/* Анкета для семей и карточки с детскими фото */
+.form-hint{font-size:13px;line-height:1.7;color:#666;margin:0 0 4px}
+.contact-photo{height:140px;width:140px;overflow:hidden;border-radius:50%;margin:0 auto 22px;background:#eee;border:1px solid #ddd}
+.contact-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.contact-role{display:block;color:#666;font-size:10px;letter-spacing:2px;margin-bottom:10px}
+.contact-card .contact-text{min-height:38px;line-height:1.6}
+.contact-link{display:inline-block;margin-top:8px;color:#111;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px}
+.contact-link:hover{opacity:.7}
+@media(max-width:700px){.contact-photo{width:120px;height:120px}}
+
+/* ВЕРСИЯ 6 — мягкая журнальная анимация текста */
+/* Заголовок обложки появляется при загрузке, не закрывая фотографию */
+.masthead span {
+  animation: editorialCoverIn 1.15s cubic-bezier(.2,.7,.2,1) both;
+}
+.masthead span:nth-child(2) { animation-delay: .24s; }
+.cover-caption { animation: editorialCoverIn 1s .46s both; }
+.cover-bottom { animation: editorialCoverIn 1s .65s both; }
+
+@keyframes editorialCoverIn {
+  from { opacity: 0; transform: translateY(18px); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* При прокрутке заголовки будто проявляются на журнальной странице */
+.reveal.visible .display,
+.reveal.visible h3,
+.reveal.visible .contact-photo {
+  animation: editorialHeadingIn 1s cubic-bezier(.18,.72,.25,1) both;
+}
+.reveal.visible .display i,
+.reveal.visible h3 i {
+  display: inline-block;
+  animation: editorialHeadingIn .95s .15s cubic-bezier(.18,.72,.25,1) both;
+}
+@keyframes editorialHeadingIn {
+  from { opacity: 0; transform: translateY(23px); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Абзацы пригласительного письма появляются по очереди */
+.letter.visible p {
+  animation: editorialLineIn .85s both;
+}
+.letter.visible p:nth-of-type(1) { animation-delay: .15s; }
+.letter.visible p:nth-of-type(2) { animation-delay: .32s; }
+.letter.visible p:nth-of-type(3) { animation-delay: .49s; }
+.letter.visible p:nth-of-type(n+4) { animation-delay: .60s; }
+@keyframes editorialLineIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Тонкие линии разворачиваются, как в журнальной верстке */
+.reveal.visible .rule {
+  transform-origin: left;
+  animation: editorialRuleIn .8s .3s both;
+}
+@keyframes editorialRuleIn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Эффект только для устройств, где разрешены анимации */
+@media (prefers-reduced-motion: reduce) {
+  .masthead span, .cover-caption, .cover-bottom,
+  .reveal.visible .display, .reveal.visible h3,
+  .reveal.visible .contact-photo, .reveal.visible .display i,
+  .reveal.visible h3 i, .letter.visible p,
+  .reveal.visible .rule { animation: none !important; filter: none !important; }
+}
+
+/* Финальная отправка после страницы контактов и ссылки на чат */
+.final-submit{max-width:640px;margin:50px auto 0;padding:45px 24px 15px;border-top:1px solid #141414;text-align:center}
+.final-submit h3{font-size:clamp(42px,7vw,66px);line-height:1.05;margin:18px 0}
+.final-submit>p:not(.fineprint):not(.form-message){font-size:14px;line-height:1.8;color:#555}
+.final-submit-button{display:inline-flex;margin:20px auto 0;justify-content:center;max-width:100%}
+.final-submit .form-message{max-width:520px;margin:18px auto 0}
+.final-submit .fineprint{max-width:550px;margin:20px auto 0}
+@media(max-width:600px){.final-submit{padding:35px 4px 10px}.final-submit-button{width:100%}}
