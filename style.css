@@ -108,3 +108,310 @@
 .final-submit .form-message{max-width:520px;margin:18px auto 0}
 .final-submit .fineprint{max-width:550px;margin:20px auto 0}
 @media(max-width:600px){.final-submit{padding:35px 4px 10px}.final-submit-button{width:100%}}
+
+/* ВЕРСИЯ 8 · тёплый свадебный журнал с настоящими страницами */
+:root{--paper:#f8f2e9;--white:#fffaf2;--ink:#382b26;--gray:#75645b;--rule:#d5c4b3;--bg:#dbcbb9;--brown:#765442;--tan:#c9aa8d}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:radial-gradient(ellipse at 50% 40%,#f6ece0 0%,#deccbb 55%,#c3a68d 100%);font-family:Manrope,Arial,sans-serif;color:var(--ink)}
+.ambient-glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,#fff8eacc,transparent 38%),radial-gradient(circle at 84% 82%,#b9886e46,transparent 40%)}
+.magazine-shell{position:relative;isolation:isolate;width:min(1120px,calc(100vw - 70px));height:calc(100dvh - 108px);min-height:380px;margin:24px auto 84px;perspective:2100px;filter:drop-shadow(0 22px 28px #4b352b35)}
+.mag-page{position:absolute!important;inset:0!important;width:100%;height:100%;min-height:0!important;padding:0!important;margin:0!important;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b99579 transparent;background:var(--white);border:1px solid #cfbca8;box-shadow:inset 14px 0 25px -24px #3e241450,inset -10px 0 20px -22px #3e241450;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-origin:left center;transform:rotateY(0deg);visibility:hidden;opacity:0;pointer-events:none;z-index:1;will-change:transform}
+.mag-page.active{visibility:visible;opacity:1;pointer-events:auto;z-index:5}
+.mag-page.turn-out-next{visibility:visible;opacity:1;pointer-events:none;z-index:10;animation:turnNext .76s cubic-bezier(.45,.06,.55,.96) forwards}
+.mag-page.turn-out-prev{visibility:visible;opacity:1;pointer-events:none;z-index:10;transform-origin:right center;animation:turnPrev .76s cubic-bezier(.45,.06,.55,.96) forwards}
+.mag-page.turn-in-next{visibility:visible;opacity:1;pointer-events:none;z-index:4;animation:fadePageIn .5s ease both}
+.mag-page.turn-in-prev{visibility:visible;opacity:1;pointer-events:none;z-index:4;animation:fadePageIn .5s ease both}
+@keyframes turnNext{0%{transform:rotateY(0);filter:brightness(1)}65%{filter:brightness(.83)}100%{transform:rotateY(-90deg);filter:brightness(.75)}}
+@keyframes turnPrev{0%{transform:rotateY(0);filter:brightness(1)}65%{filter:brightness(.83)}100%{transform:rotateY(90deg);filter:brightness(.75)}}
+@keyframes fadePageIn{from{opacity:.55}to{opacity:1}}
+.mag-page .wrap{width:min(100% - 80px,900px);margin:auto;min-height:100%;padding:38px 0 30px;display:flex;flex-direction:column}
+.mag-page .wrap>.folio.bottom{margin-top:auto;padding-top:17px}
+.paper,.paper:nth-of-type(even){background:linear-gradient(115deg,#f4e8da 0%,#fffaf2 48%,#f9f1e8 100%)}
+.paper:nth-of-type(odd){background:linear-gradient(110deg,#f8ede0 0%,#fffaf2 55%,#f5e8d9 100%)}
+.micro,.edition,.folio,.cover-top,.cover-caption,.cover-bottom small,.cover-bottom strong,.cover-back,.label,.tiny{color:var(--brown);letter-spacing:.15em}
+.folio{font-size:10px;border-bottom-color:var(--tan)}.folio.bottom{border-top-color:var(--tan)}
+.fineprint,.muted,.section-heading p,.timeline-row p,.venue-card p,.detail p,.form-hint{color:var(--gray)}
+.hero.cover-page{display:flex;align-items:center;justify-content:center;gap:12px;padding:17px!important;background:linear-gradient(138deg,#efe0cd,#f9f2e8 43%,#dbc2a8)}
+.cover-page .edition{flex-shrink:0;max-width:490px;color:var(--brown)}
+.cover-page .book-stage{flex:1 1 auto;width:min(420px,88%);min-height:0;max-height:calc(100% - 130px);aspect-ratio:auto}
+.cover-page .book{width:100%;height:100%}
+.cover-page .cover-front{background:#fbf5ec;border-color:#c9b39d}
+.cover-page .inside-cover,.cover-page .cover-back{background:#eddfcc;border-color:#b99f86}
+.cover-photo{background:#e4d5c6}
+.cover-photo img{object-fit:contain}
+.cover-page .cover-sheet{transition:transform 1.05s cubic-bezier(.65,.02,.2,1)}
+.cover-page .solid-button{flex-shrink:0}
+.solid-button{background:var(--brown);color:#fff9f1;border-color:var(--brown)}
+.solid-button:hover,.solid-button:focus-visible{background:#fff7ed;color:var(--brown);border-color:var(--brown)}
+.cover-bottom{border-bottom-color:var(--tan)}
+.split{padding:50px 0 55px;gap:40px;align-items:center}
+.display{font-size:clamp(62px,7.3vw,105px);margin:12px 0 20px}
+.letter{padding:0}.letter h3{font-size:clamp(43px,5.3vw,67px);margin:15px 0}.letter p{font-size:clamp(13px,1.4vw,16px);line-height:1.7;margin:0 0 13px}.date-line{margin:17px 0;font-size:28px}.signature{font-size:25px}.rule{background:var(--tan);margin:18px 0}.page-num{color:#d7bfaa;font-size:96px}
+.center-block{padding:clamp(30px,6vh,75px) 0}.countdown{margin:42px auto 22px}.countdown>div{border-top-color:var(--tan)}
+.section-heading{padding:20px 0 28px}.section-heading .display{font-size:clamp(57px,7vw,95px);margin:13px 0}.section-heading p{margin:0}
+.timeline{width:100%}.timeline-row{padding:16px 0;border-top-color:var(--rule)}.timeline-row:last-child{border-bottom-color:var(--rule)}.timeline-row b{font-size:32px}.timeline-row h3{font-size:28px}.timeline-row p{margin:0}.venue-grid{gap:18px}.venue-card{min-height:280px;border-color:var(--tan);background:#fff8ed99;padding:25px}.venue-card h3{font-size:40px;margin:18px 0}.outline-link{border-color:var(--brown)}.outline-link:hover{background:var(--brown)}
+.detail{padding:13px 0;border-color:var(--rule)}.detail:last-child{border-color:var(--rule)}.detail h3{font-size:29px}.detail p{line-height:1.65;font-size:13px}
+.rsvp-form{width:100%;padding-bottom:24px;gap:12px}.rsvp-form input[type=text],.rsvp-form textarea{border-bottom-color:var(--tan);color:var(--ink)}.choice input{accent-color:var(--brown)}.rsvp-reminder{background:#f0dfcb;border-color:var(--brown)}
+.contact-grid{gap:15px}.contact-card{border-color:var(--tan);background:#fff7e8ab;padding:21px}.contact-photo{width:112px;height:112px;border-color:var(--tan)}.contact-card h3{font-size:37px}.contact-card .contact-text{margin:8px 0 0}.chat-note{margin:24px 0}.final-submit{max-width:660px;margin:23px auto 0;padding:22px 15px 10px;border-top-color:var(--tan)}.final-submit h3{font-size:43px;margin:8px 0}.final-submit-button{margin-top:8px}.final-submit .fineprint{margin:12px auto 0}
+.ending.final-page{display:flex;justify-content:center;align-items:center;text-align:center;background:linear-gradient(145deg,#684638,#9c755e 60%,#694837);color:#fff6e9}.ending h2{font-size:clamp(65px,9vw,120px)}.ending .micro,.ending p{color:#f4e1d0}
+.magazine-nav{position:fixed;bottom:19px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:20px;z-index:40;background:#fff9f0f5;border:1px solid #d4bda8;border-radius:50px;padding:7px 12px;box-shadow:0 6px 25px #48271728}
+.nav-arrow{width:42px;height:42px;border:1px solid #caa88f;border-radius:50%;background:#fbf1e4;color:#553a2c;font-size:24px;transition:background .2s,transform .2s}.nav-arrow:hover:not(:disabled){background:#e2c6ab;transform:scale(1.04)}.nav-arrow:disabled{opacity:.25;cursor:not-allowed}
+.page-indicator{min-width:160px;text-align:center;font-size:10px;letter-spacing:.12em;color:#644b3b;white-space:nowrap}
+.swipe-hint{position:fixed;right:18px;bottom:24px;color:#6f5344;font-size:9px;letter-spacing:.10em;margin:0}
+/* Анимации на каждой новой странице: элементы появляются каскадом */
+.mag-page .reveal{opacity:0;transform:translateY(24px);transition:none!important}
+.mag-page.active .reveal,.mag-page.turn-in-next .reveal,.mag-page.turn-in-prev .reveal{animation:riseAndFade .8s cubic-bezier(.22,.78,.22,1) both}
+.mag-page.active .reveal:nth-of-type(2),.mag-page.turn-in-next .reveal:nth-of-type(2){animation-delay:.14s}
+.mag-page.active .reveal:nth-of-type(3),.mag-page.turn-in-next .reveal:nth-of-type(3){animation-delay:.24s}
+.mag-page.active .letter p{animation:riseAndFade .72s both}.mag-page.active .letter p:nth-of-type(1){animation-delay:.19s}.mag-page.active .letter p:nth-of-type(2){animation-delay:.35s}.mag-page.active .letter p:nth-of-type(3){animation-delay:.49s}
+.mag-page.active .timeline-row,.mag-page.active .detail,.mag-page.active .venue-card,.mag-page.active .contact-card{animation:riseAndFade .7s both}
+.mag-page.active .timeline-row:nth-child(2),.mag-page.active .detail:nth-child(2),.mag-page.active .venue-card:nth-child(2),.mag-page.active .contact-card:nth-child(2){animation-delay:.15s}
+.mag-page.active .timeline-row:nth-child(3),.mag-page.active .detail:nth-child(3){animation-delay:.28s}
+.mag-page.active .timeline-row:nth-child(4),.mag-page.active .detail:nth-child(4){animation-delay:.42s}
+@keyframes riseAndFade{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+/* На узких экранах листаем страницы, а содержимое одной страницы можно прокручивать внутри */
+@media(max-width:700px){
+ .magazine-shell{width:calc(100vw - 18px);height:calc(100dvh - 96px);margin:8px auto 88px;min-height:300px}
+ .mag-page .wrap{width:calc(100% - 32px);padding:20px 0 20px}
+ .hero.cover-page{padding:8px!important;gap:9px}
+ .cover-page .book-stage{width:min(89%,365px);max-height:calc(100% - 113px)}
+ .edition{font-size:8px}.cover-page .micro.muted{font-size:8px;margin:0}
+ .split{grid-template-columns:1fr;padding:24px 0;gap:8px}.split>.reveal:first-child{display:none}
+ .display,.section-heading .display{font-size:clamp(54px,13vw,77px)}
+ .letter h3{font-size:52px;margin:8px 0}.letter p{font-size:14px;line-height:1.67;margin-bottom:10px}.date-line{font-size:25px}
+ .section-heading{padding:12px 0 20px}.timeline-row{grid-template-columns:75px 1fr 13px;gap:10px;padding:15px 0}.timeline-row b{font-size:25px}.timeline-row h3{font-size:24px}
+ .venue-grid,.contact-grid{grid-template-columns:1fr}.venue-card{min-height:255px}.venue-card h3{font-size:36px}.detail{grid-template-columns:30px 1fr;gap:10px}.detail h3{font-size:25px}.countdown{gap:4px;margin:32px auto 20px}.countdown strong{font-size:clamp(36px,9vw,54px)}.center-block{padding:25px 0}
+ .contact-photo{width:93px;height:93px;margin-bottom:8px}.contact-card{padding:14px}.contact-card .contact-text{min-height:0}.chat-note{margin:20px 0}
+ .final-submit{padding:20px 0 0;margin-top:12px}.final-submit h3{font-size:40px}.final-submit-button{width:100%}
+ .magazine-nav{bottom:11px;gap:10px}.nav-arrow{width:39px;height:39px}.page-indicator{min-width:125px;font-size:9px}
+ .swipe-hint{display:none}
+}
+@media(prefers-reduced-motion:reduce){.mag-page.turn-out-next,.mag-page.turn-out-prev,.mag-page.turn-in-next,.mag-page.turn-in-prev,.mag-page.active .reveal,.mag-page.active .letter p,.mag-page.active .timeline-row,.mag-page.active .detail,.mag-page.active .venue-card,.mag-page.active .contact-card{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}.mag-page .reveal{opacity:1!important;transform:none!important}}
+
+
+/* ============================================================
+   V9 · ТЁПЛЫЙ СЕМЕЙНЫЙ ЖУРНАЛ — БУМАГА, КОФЕ, ТАКТИЛЬНЫЕ ФАКТУРЫ
+   ============================================================ */
+:root {
+  --cream: #f8efe3;
+  --warm-ivory: #fff8ed;
+  --cocoa: #654637;
+  --caramel: #b68c6b;
+  --soft-beige: #e8d3ba;
+  --ink: #38271f;
+  --gray: #806c5e;
+  --rule: #d7bfa6;
+}
+html { background: #dec8b1; }
+body {
+  background:
+    radial-gradient(ellipse 46vw 46vw at 8% 12%, #f5e4d2 0%, transparent 75%),
+    radial-gradient(ellipse 52vw 48vw at 92% 80%, #b8896c55 0%, transparent 72%),
+    radial-gradient(ellipse 65vw 48vw at 88% 5%, #fff5e8a8 0%, transparent 75%),
+    repeating-linear-gradient(109deg, #63432a07 0px, #63432a07 1px, transparent 1px, transparent 9px),
+    #dec9b4;
+  background-attachment: fixed;
+}
+/* Тонкий орнамент: ненавязчивый штрих в обрамлении журнала. */
+body::before, body::after {
+  content: ''; position: fixed; width: 290px; height: 290px;
+  border: 1px solid #80583a28; border-radius: 50%;
+  pointer-events: none; z-index: 0;
+}
+body::before { top: -160px; left: -145px; box-shadow: 0 0 0 23px #faf3ea3d, 0 0 0 49px #79523e0b; }
+body::after { bottom: -188px; right: -145px; box-shadow: 0 0 0 24px #fff4e83c, 0 0 0 51px #79523e0b; }
+.ambient-glow { background: none!important; opacity: 0!important; }
+.magazine-shell { position: relative; z-index: 1; filter: drop-shadow(0 22px 25px #4b30293b); }
+.mag-page.paper {
+  background:
+    radial-gradient(ellipse 90% 55% at 100% 0%, #eed9bd61, transparent 75%),
+    radial-gradient(ellipse 75% 85% at -8% 100%, #e6cdb43a, transparent 80%),
+    repeating-linear-gradient(93deg, #9c73500a 0 1px, transparent 1px 5px),
+    linear-gradient(125deg, #f8eedf 0%, #fffaf1 40%, #f7ead9 100%);
+}
+.mag-page.paper::before {
+  content: ''; position: absolute; inset: 9px;
+  border: 1px solid #b9947329; border-radius: 1px;
+  pointer-events: none; z-index: 0;
+}
+.mag-page.paper > .wrap { position: relative; z-index: 1; }
+.cover-page {
+  background:
+    radial-gradient(ellipse at 80% 19%, #fffaf2d5, transparent 70%),
+    repeating-linear-gradient(98deg, #b18a6310 0 1px, transparent 1px 8px),
+    linear-gradient(145deg,#e2c5a5,#f4e3d0 45%,#bd997f)!important;
+}
+.cover-front { box-shadow: inset 0 0 32px #6f463629, 0 9px 30px #44291950; }
+.cover-top, .masthead, .cover-caption { text-shadow: 0 1px 0 #fff7ec77; }
+.cover-front .masthead { color: #523529; }
+.venue-card, .contact-card, .rsvp-reminder {
+  box-shadow: 0 8px 24px #6347300e, inset 0 1px 0 #fffdf6;
+}
+.magazine-nav { background: #fff8eeef; backdrop-filter: blur(9px); box-shadow: 0 7px 25px #67442d32; }
+
+/* Буквы проявляются ПОСЛЕ перелистывания, с заметной задержкой.
+   Старую анимацию .active намеренно отключаем: она начиналась,
+   пока страница ещё была закрыта предыдущим листом. */
+.mag-page .reveal,
+.mag-page .letter p,
+.mag-page .timeline-row,
+.mag-page .detail,
+.mag-page .venue-card,
+.mag-page .contact-card { animation: none!important; transition: none!important; opacity: 1; transform: none; }
+.mag-page.active.page-entered .reveal {
+  animation: cozyFloatIn 1.05s cubic-bezier(.17,.78,.23,1) both!important;
+}
+.mag-page.active.page-entered .wrap > .reveal:nth-child(3),
+.mag-page.active.page-entered .venue-card:nth-child(2),
+.mag-page.active.page-entered .contact-card:nth-child(2) { animation-delay: .22s!important; }
+.mag-page.active.page-entered .timeline-row,
+.mag-page.active.page-entered .detail,
+.mag-page.active.page-entered .venue-card,
+.mag-page.active.page-entered .contact-card {
+  animation: cozyFloatIn .95s cubic-bezier(.2,.75,.2,1) both!important;
+  animation-delay: calc(.18s + var(--item-delay, 0s))!important;
+}
+.mag-page.active.page-entered .timeline-row:nth-child(2),
+.mag-page.active.page-entered .detail:nth-child(2),
+.mag-page.active.page-entered .venue-card:nth-child(2),
+.mag-page.active.page-entered .contact-card:nth-child(2) { --item-delay: .16s; }
+.mag-page.active.page-entered .timeline-row:nth-child(3),
+.mag-page.active.page-entered .detail:nth-child(3) { --item-delay: .32s; }
+.mag-page.active.page-entered .timeline-row:nth-child(4),
+.mag-page.active.page-entered .detail:nth-child(4) { --item-delay: .48s; }
+.mag-page.active.page-entered .letter p {
+  animation: cozyFloatIn .95s cubic-bezier(.2,.75,.2,1) both!important;
+}
+.mag-page.active.page-entered .letter p:nth-of-type(1) { animation-delay: .3s!important; }
+.mag-page.active.page-entered .letter p:nth-of-type(2) { animation-delay: .48s!important; }
+.mag-page.active.page-entered .letter p:nth-of-type(3) { animation-delay: .66s!important; }
+@keyframes cozyFloatIn {
+  0% { opacity: 0; transform: translate3d(0,36px,0); filter: blur(4px); }
+  70% { filter: blur(0); }
+  100% { opacity: 1; transform: translate3d(0,0,0); filter: blur(0); }
+}
+.letter-heading .letter-char { display:inline-block; white-space:pre; }
+.mag-page.active.page-entered .letter-heading .letter-char {
+  animation: letterEmerge .72s cubic-bezier(.19,.77,.29,1) both;
+  animation-delay: calc(.2s + var(--char-order) * 35ms);
+}
+@keyframes letterEmerge {
+  from { opacity: 0; transform: translate3d(0,19px,0) rotate(-2deg); filter: blur(3px); }
+  to { opacity: 1; transform: translate3d(0,0,0) rotate(0); filter: blur(0); }
+}
+@media (max-width:700px) {
+  body::before, body::after { width:140px;height:140px; }
+  body::before { top:-100px;left:-100px; }
+  body::after { bottom:-100px;right:-100px; }
+  .mag-page.paper::before { inset:5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mag-page.active.page-entered .reveal,
+  .mag-page.active.page-entered .letter p,
+  .mag-page.active.page-entered .timeline-row,
+  .mag-page.active.page-entered .detail,
+  .mag-page.active.page-entered .venue-card,
+  .mag-page.active.page-entered .contact-card,
+  .mag-page.active.page-entered .letter-heading .letter-char {
+    animation:none!important; opacity:1!important; transform:none!important; filter:none!important;
+  }
+}
+
+
+/* ===========================================================
+   V10 · КОРИЧНЕВЫЙ ШЁЛК + МОЛОЧНОЕ КРУЖЕВО, БЕЗ ФОТО И КАРТИНОК
+   Оттенки и фактура построены исключительно CSS-градиентами.
+   =========================================================== */
+:root {
+  --silk-dark: #43291f;
+  --silk-middle: #79503e;
+  --silk-light: #be9476;
+  --lace: #fff4e3;
+}
+html { background: var(--silk-dark); }
+body {
+  /* Волны и блики создают ощущение складок коричневого атласа. */
+  background-color: #654333;
+  background-image:
+    radial-gradient(ellipse 65% 30% at 3% 8%, #f0c7a45e 0%, transparent 78%),
+    radial-gradient(ellipse 44% 64% at 96% 65%, #21110e9c 0%, transparent 88%),
+    radial-gradient(ellipse 66% 35% at 80% 8%, #e0b08a55 0%, transparent 78%),
+    linear-gradient(114deg,
+      #3b251e 0%, #6c4636 9%, #b88b69 15%,
+      #5d3a2c 22%, #39251e 29%, #a37659 37%,
+      #d0a17c 43%, #6e4837 50%, #39241c 57%,
+      #a87859 64%, #d4a782 68%, #5f4031 76%,
+      #311f19 84%, #9d7055 92%, #503429 100%);
+  background-attachment: fixed;
+}
+/* Блеск на ткани — тонкие полупрозрачные диагональные блики. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(125deg, transparent 18%, #fff2de15 27%, transparent 34%, #170c081f 42%, transparent 51%),
+    linear-gradient(105deg, transparent 56%, #fff7e725 66%, transparent 75%);
+  opacity: .95;
+}
+/* Декоративная полоса молочного кружева по краю экрана. */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: 23px;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .78;
+  background:
+    radial-gradient(circle at 50% 12px, transparent 5px, #fff4e3e0 5.6px 6.6px, transparent 7px) 0 0 / 23px 27px repeat-y,
+    radial-gradient(circle at 0% 12px, #fff5e8e8 7px, transparent 7.5px) 11px 0 / 23px 27px repeat-y,
+    linear-gradient(90deg,#fff8ecd9 0 2px,transparent 2px 100%);
+}
+/* Кружевная окантовка страниц на светлой «бумаге». */
+.mag-page.paper::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 8px;
+  height: 23px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: .54;
+  background:
+    radial-gradient(circle at 50% -3px, transparent 10px, #c6a58a 10.7px 11.7px, transparent 12.4px) 0 0 / 31px 23px repeat-x,
+    radial-gradient(circle at 50% 14px, #fff5e8 2px, #c3a285 2.5px 3.5px, transparent 4px) 15px 0 / 31px 23px repeat-x;
+}
+/* Светлые страницы и кнопки не теряют контраст на шёлке. */
+.mag-page.paper {
+  background:
+    radial-gradient(ellipse 80% 60% at 90% 0%, #ead6c294,transparent 75%),
+    repeating-linear-gradient(95deg,#9873580b 0 1px,transparent 1px 7px),
+    linear-gradient(125deg,#fff7ea 0%,#fffdf6 48%,#f1e2d0 100%);
+}
+.magazine-shell { filter: drop-shadow(0 24px 38px #170c0aa8); }
+.magazine-nav { box-shadow: 0 8px 25px #1d100f66; }
+.cover-page {
+  background:
+    radial-gradient(ellipse at 65% 15%,#fffaf2df,transparent 70%),
+    linear-gradient(140deg,#e6cbb1,#fff4e1 43%,#bd9378)!important;
+}
+@media(max-width:700px) {
+  body::after { width:12px; opacity:.5; background-size:12px 20px,12px 20px,auto; }
+  .mag-page.paper::after { left:9px;right:9px;height:17px; opacity:.35; background-size:22px 17px,22px 17px; }
+}
